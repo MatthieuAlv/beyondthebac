@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond The Bac | Matthieu Alves</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1E52D8;
+      --blue-dark: #1340B0;
+      --navy: #0D1B2A;
+      --navy-mid: #152236;
+      --white: #FFFFFF;
+      --off-white: #F8FAFC;
+      --gray-light: #E2E8F0;
+      --gray: #64748B;
+      --text: #1E293B;
+    }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-dark); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a2d45 100%);
+      color: var(--white);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 60% 40%, rgba(30,82,216,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .hero-photo {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--blue);
+      box-shadow: 0 0 0 6px rgba(30,82,216,0.2);
+    }
+    .hero-badge {
+      background: rgba(30,82,216,0.2);
+      border: 1px solid rgba(30,82,216,0.5);
+      color: #93C5FD;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: #60A5FA; }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #94A3B8;
+      max-width: 620px;
+    }
+    .hero-tagline {
+      font-size: 1rem;
+      color: #CBD5E1;
+      font-style: italic;
+      border-left: 3px solid var(--blue);
+      padding-left: 1rem;
+      text-align: left;
+      max-width: 520px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(30,82,216,0.4);
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(30,82,216,0.5);
+    }
+    .hero-note { font-size: 0.85rem; color: #64748B; }
+
+    /* PATH BAR */
+    .path-bar {
+      background: var(--off-white);
+      border-top: 1px solid var(--gray-light);
+      border-bottom: 1px solid var(--gray-light);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .path-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+    .path-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .path-steps .arrow { color: var(--blue); font-weight: 900; }
+    .path-steps .step {
+      background: white;
+      border: 1px solid var(--gray-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    /* PROBLEM */
+    .problem { background: white; }
+    .problem-text {
+      font-size: 1.05rem;
+      color: #334155;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 1rem;
+      color: #334155;
+      padding: 1rem 1.25rem;
+      background: #FEF2F2;
+      border-left: 3px solid #EF4444;
+      border-radius: 0 6px 6px 0;
+    }
+    .pain-list li::before { content: '✗'; color: #EF4444; font-weight: 700; flex-shrink: 0; }
+
+    /* WHAT YOU GET */
+    .outcomes { background: var(--off-white); }
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .outcome-card {
+      background: white;
+      border: 1px solid var(--gray-light);
+      border-top: 3px solid var(--blue);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .outcome-card .icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .outcome-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .outcome-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+
+    /* ABOUT */
+    .about { background: white; }
+    .about-flex {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-photo {
+      width: 200px; height: 250px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 10px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .about-text p {
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-text strong { color: var(--navy); }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--navy); color: white; }
+    .testimonials h2 { color: white; }
+    .testimonials .section-label { color: #60A5FA; }
+    .testimonial-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 2rem 2rem 2rem 3rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-size: 6rem;
+      color: var(--blue);
+      line-height: 0;
+      position: absolute;
+      top: 2.5rem; left: 1.25rem;
+      opacity: 0.35;
+    }
+    .testimonial-text {
+      font-size: 1.1rem;
+      color: #CBD5E1;
+      line-height: 1.75;
+      font-style: italic;
+    }
+    .testimonial-author {
+      margin-top: 1.25rem;
+      font-weight: 700;
+      color: #60A5FA;
+      font-size: 0.95rem;
+    }
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 3rem;
+      justify-content: center;
+      text-align: center;
+    }
+    .stat-number { font-size: 2.75rem; font-weight: 900; color: white; }
+    .stat-number span { color: #60A5FA; }
+    .stat-desc { font-size: 0.85rem; color: #64748B; margin-top: 0.25rem; }
+
+    /* FINAL CTA */
+    .final-cta {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .final-cta h2 { color: white; font-size: clamp(1.75rem, 4vw, 2.75rem); }
+    .final-cta p { color: rgba(255,255,255,0.8); font-size: 1.05rem; max-width: 560px; margin: 1rem auto 2rem; }
+    .btn-white {
+      display: inline-block;
+      background: white;
+      color: var(--blue);
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.3); }
+    .final-note { margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: #64748B;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: #94A3B8; text-decoration: none; }
+    footer a:hover { color: white; }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-logo img { height: 36px; }
+      section { padding: 3.5rem 1.25rem; }
+      .about-flex { flex-direction: column; text-align: center; }
+      .about-photo { width: 160px; height: 200px; margin: 0 auto; }
+      .path-steps { font-size: 0.76rem; }
+      .stat-number { font-size: 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY NAV -->
+  <nav>
+    <div class="nav-logo">
+      <img src="Screenshot-2026-03-20-at-15.10.02.jpeg" alt="Beyond The Bac" />
+    </div>
+    <a href="https://calendar.app.google/BF9M4SMmrL4jtSHL6" target="_blank" rel="noopener" class="nav-cta">Book a free consultation</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img src="IMG_7077.jpeg" alt="Matthieu Alves" class="hero-photo" />
+      <span class="hero-badge">Career Coach &amp; AI Leader · BNP Paribas</span>
+      <h1>Your Path to the World's<br /><span>Top Universities &amp; Elite Careers</span><br />Starts Here.</h1>
+      <p class="hero-subtitle">
+        I help ambitious students at international schools in France secure spots at the world's top universities — and launch careers at the most prestigious institutions on the planet.
+      </p>
+      <p class="hero-tagline">The Insider's Edge — From International School to the World's Top Institutions.</p>
+      <a href="https://calendar.app.google/BF9M4SMmrL4jtSHL6" target="_blank" rel="noopener" class="btn-primary">Book a free consultation →</a>
+      <p class="hero-note">15-minute call · 100% free · No commitment</p>
+    </div>
+  </section>
+
+  <!-- CREDENTIAL PATH BAR -->
+  <div class="path-bar">
+    <p class="path-label">Matthieu's Path — The Exact Route He'll Help You Navigate</p>
+    <div class="path-steps">
+      <span class="step">🎓 Lycée International de St-Germain-en-Laye</span>
+      <span class="arrow">→</span>
+      <span class="step">McGill University</span>
+      <span class="arrow">→</span>
+      <span class="step">London Business School</span>
+      <span class="arrow">→</span>
+      <span class="step">BNP Paribas</span>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="problem">
+    <div class="container">
+      <p class="section-label">The Reality</p>
+      <h2>The Admissions Process Is a Black Box — and Most Students Pay the Price</h2>
+      <p class="problem-text">
+        Getting into a top university isn't just about grades. It's about knowing unwritten rules that nobody teaches you — and by the time most students figure that out, critical doors have already closed.
+      </p>
+      <ul class="pain-list">
+        <li>Admissions is a black box — top institutions never explain what they truly look for</li>
+        <li>Success requires years of foresight and planning most students and parents don't have</li>
+        <li>Applications are long, overwhelming, and full of invisible landmines</li>
+        <li>The fear of wasted potential weighs on every family — one wrong move can close doors forever</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="outcomes">
+    <div class="container">
+      <p class="section-label">What You Get</p>
+      <h2>Everything You Need to Win — From Day One</h2>
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <div class="icon">🗺️</div>
+          <h3>A Multi-Year Roadmap</h3>
+          <p>A clear, personalised strategy built years in advance so nothing is left to chance or last-minute panic.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="icon">🔑</div>
+          <h3>Insider Admissions Knowledge</h3>
+          <p>As an active LBS interviewer, Matthieu knows exactly what elite institutions look for — and what disqualifies most applicants.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="icon">🌐</div>
+          <h3>Access to an Elite Network</h3>
+          <p>Direct introductions to mentors at top universities and firms — connections most students spend years trying to build.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="icon">🏆</div>
+          <h3>100% Top-3 Placement Rate</h3>
+          <p>Every student Matthieu has coached has been accepted to one of their top 3 target schools. No exceptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="container">
+      <p class="section-label">Who Is Matthieu?</p>
+      <div class="about-flex">
+        <img src="IMG_7077.jpeg" alt="Matthieu Alves" class="about-photo" />
+        <div class="about-text">
+          <h2>He Didn't Just Study the Path.<br />He Walked It.</h2>
+          <p>
+            Matthieu Alves grew up in the same international school environment his students navigate today. From <strong>Lycée International de Saint-Germain-en-Laye</strong>, he secured a spot at <strong>McGill University</strong>, earned his Master in Management at <strong>London Business School</strong>, and joined <strong>BNP Paribas</strong> as an AI Leader.
+          </p>
+          <p>
+            He now sits on the other side of the table — as an <strong>active LBS admissions interviewer</strong>, he evaluates candidates for one of the world's most selective programmes. He knows exactly what separates a good application from an unforgettable one.
+          </p>
+          <p>
+            His coaching combines real insider knowledge, a global network of mentors, and a genuine passion for helping ambitious students go further than they imagined possible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <p class="section-label">Client Results</p>
+      <h2>Real Students. Real Outcomes.</h2>
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          After two years working with Matthieu, I landed a senior consultant offer, scored in the 90th percentile on the GMAT, and I'm now pursuing my MBA at McGill. He didn't just coach me — he opened doors I didn't even know existed.
+        </p>
+        <p class="testimonial-author">— Marc, 25 · Senior Consultant · MBA Candidate, McGill University</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-number"><span>100</span>%</div>
+          <div class="stat-desc">Top-3 school placement rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">90<span>th</span></div>
+          <div class="stat-desc">Percentile GMAT achieved</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number"><span>3</span></div>
+          <div class="stat-desc">Elite institutions in Matthieu's own path</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Your Future Is Decided by What You Do Today.</h2>
+      <p>Book a free 15-minute consultation and find out exactly what's standing between you and your top school.</p>
+      <a href="https://calendar.app.google/BF9M4SMmrL4jtSHL6" target="_blank" rel="noopener" class="btn-white">Book a free consultation →</a>
+      <p class="final-note">15 minutes. No pressure. Just clarity.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Matthieu Alves · Beyond The Bac · From International Excellence to Global Careers</p>
+  </footer>
+
+</body>
+</html>
